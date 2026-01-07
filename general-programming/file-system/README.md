@@ -40,22 +40,22 @@ go run .
 once the shell starts, you will see a > prompt. you can execute the following commands:
 ```
 mkdir <path>
-<!-- create a directory (e.g., mkdir /usr) -->
+# create a directory (e.g., mkdir /usr)
 
 touch <path> [content]
-<!-- create a file with optional content (e.g., touch /usr/file.txt hello world) -->
+# create a file with optional content (e.g., touch /usr/file.txt hello world)
 
 ls [path]
-<!-- list directory contents. defaults to root if path is omitted. -->
+# list directory contents. defaults to root if path is omitted.
 
 cat <path>
-<!-- print the content of a file to the terminal. -->
+# print the content of a file to the terminal.
 
 rm <path>
-<!-- remove a file or directory recursively. -->
+# remove a file or directory recursively.
 
 exit
-<!-- close the application. -->
+# close the application.
 ```
 
 ### testing
