@@ -38,7 +38,7 @@ go run .
 ```
 
 once the shell starts, you will see a > prompt. you can execute the following commands:
-```
+```bash
 mkdir <path>
 # create a directory (e.g., mkdir /usr)
 
@@ -63,7 +63,11 @@ exit
 the project includes a test suite covering unit tests for operations and integration tests for full workflows.
 
 run the tests:
+```go
 go test -v
+```
 
 check test coverage:
+```go
 go test -cover
+```

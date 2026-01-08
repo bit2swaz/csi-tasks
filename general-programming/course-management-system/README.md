@@ -20,7 +20,7 @@ go run .
 ```
 
 ### commands
-```
+```bash
 add <id> <name>
 # register a new course (e.g., add cs101 intro to cs)
 
