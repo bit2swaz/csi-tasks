@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+body {
+    background: #f0f2f5;
+    overscroll-behavior: none; /* Prevents bounce on Mac */
+}
