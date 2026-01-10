@@ -2,10 +2,10 @@ package main
 
 import "sync"
 
-// DocumentStore handles thread-safe access to document contents
+// handles thread-safe access to document contents
 type DocumentStore struct {
 	sync.RWMutex
-	docs map[string]string // ID -> Content
+	docs map[string]string // ID -> content
 }
 
 func NewDocumentStore() *DocumentStore {
@@ -26,5 +26,29 @@ func (s *DocumentStore) Update(id, content string) {
 	s.docs[id] = content
 }
 
-// Global store instance
+func (s *DocumentStore) List() []string {
+	s.RLock()
+	defer s.RUnlock()
+	keys := make([]string, 0, len(s.docs))
+	for k := range s.docs {
+		keys = append(keys, k)
+	}
+	return keys
+}
+
+func (s *DocumentStore) Delete(id string) {
+	s.Lock()
+	defer s.Unlock()
+	delete(s.docs, id)
+}
+
+func (s *DocumentStore) Create(id string) {
+	s.Lock()
+	defer s.Unlock()
+	if _, exists := s.docs[id]; !exists {
+		s.docs[id] = ""
+	}
+}
+
+// global store instance
 var store = NewDocumentStore()

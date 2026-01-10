@@ -12,12 +12,43 @@ this project implements a course management system for a university. it manages 
 
 ## usage
 
-### running the system
+### prerequisites
+
+ensure you have go installed on your machine.
+
+### running the application
+
+clone the repository and navigate to the project folder.
+
+#### command-line flags
+
+the application supports the following flags:
+
+```bash
+# show help message
+go run . --help
+# or
+go run . -h
+
+# show version information
+go run . --version
+# or
+go run . -v
+
+# start interactive shell (default behavior)
+go run .
+# or explicitly
+go run . --interactive
+```
+
+#### interactive shell
 
 start the interactive shell:
-```go
+```bash
 go run .
 ```
+
+once the shell starts, you will see a `>` prompt. you can execute the following commands:
 
 ### commands
 ```bash
@@ -37,8 +68,50 @@ enroll <course_id> [completed_courses...]
 rm <course_id>
 # remove a course and clean up all references to it.
 
+help
+# show available commands and their usage.
+
 exit
 # close the program.
+```
+
+### example session
+
+```bash
+$ go run .
+
+Course Management System started.
+Type 'help' for available commands or 'exit' to quit.
+
+> add CS101 Introduction to Computer Science
+ok
+> add CS201 Data Structures
+ok
+> add CS301 Algorithms
+ok
+> prereq CS201 CS101
+ok
+> prereq CS301 CS201
+ok
+> ls CS301
+prerequisites for CS301: [CS101 CS201]
+> enroll CS301 CS101 CS201
+true
+> enroll CS301 CS101
+false
+> help
+
+Available Commands:
+  add <id> <name>                   Register a new course
+  prereq <courseID> <prereqID>      Add prerequisite dependency
+  ls <courseID>                     List all prerequisites
+  enroll <courseID> [completed...]  Check if eligible to enroll
+  rm <courseID>                     Remove a course
+  help                              Show this help
+  exit                              Exit the program
+
+> exit
+Shutting down...
 ```
 
 ## testing

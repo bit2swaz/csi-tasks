@@ -8,7 +8,7 @@ import { Undo, Redo, StickyNote, Image as ImageIcon, Save, Trash2, Camera } from
 export const Toolbar = () => {
   const addPin = useBoardStore((state) => state.addPin);
   
-  // Access temporal state for undo/redo
+  // access temporal state for undo/redo
   const { undo, redo } = useBoardStore.temporal.getState();
   const canUndo = useStore(useBoardStore.temporal, (state) => state.pastStates.length > 0);
   const canRedo = useStore(useBoardStore.temporal, (state) => state.futureStates.length > 0);
@@ -41,7 +41,7 @@ export const Toolbar = () => {
   return (
     <div className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-white shadow-2xl rounded-full px-6 py-3 flex items-center gap-4 border border-gray-100 z-50">
       
-      {/* Add Text Note */}
+      {/* add Text Note */}
       <button 
         onClick={() => addPin('text', '')}
         className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-700"
@@ -50,7 +50,7 @@ export const Toolbar = () => {
         <StickyNote size={20} />
       </button>
 
-      {/* Add Image */}
+      {/* add Image */}
       <label className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-700 cursor-pointer" title="Add Image">
         <ImageIcon size={20} />
         <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
@@ -58,7 +58,7 @@ export const Toolbar = () => {
 
       <div className="w-px h-6 bg-gray-200 mx-2" />
 
-      {/* Undo / Redo */}
+      {/* undo / redo */}
       <button 
         onClick={() => undo()}
         disabled={!canUndo}
@@ -76,7 +76,7 @@ export const Toolbar = () => {
 
       <div className="w-px h-6 bg-gray-200 mx-2" />
 
-      {/* Snapshots */}
+      {/* snapshots */}
       <div className="relative">
         <button 
             onClick={() => setShowSnapshots(!showSnapshots)}

@@ -17,7 +17,7 @@ export const Pin = React.memo(({ pin, scale }: PinProps) => {
   const removePin = useBoardStore((state) => state.removePin);
   const [isEditing, setIsEditing] = useState(false);
   
-  // 1. Create a ref for the draggable element
+  // 1. create a ref for the draggable element
   const nodeRef = useRef<HTMLDivElement>(null);
 
   const handleStop = (_e: any, data: { x: number; y: number }) => {
@@ -26,14 +26,14 @@ export const Pin = React.memo(({ pin, scale }: PinProps) => {
 
   return (
     <Draggable
-      nodeRef={nodeRef} // 2. Pass the ref here
+      nodeRef={nodeRef} // 2. pass the ref here
       position={{ x: pin.x, y: pin.y }}
       scale={scale}
       handle=".drag-handle"
       onStop={handleStop}
-      onMouseDown={(e) => e.stopPropagation()}
+      onMouseDown={(e: any) => e.stopPropagation()}
     >
-      {/* 3. Attach the ref to the actual DOM element */}
+      {/* 3. attach the ref to the actual DOM element */}
       <div 
         ref={nodeRef} 
         className="absolute top-0 left-0" 

@@ -10,10 +10,10 @@ export interface Pin {
   type: PinType;
   x: number;
   y: number;
-  content: string; // Text string or Image Base64/URL
+  content: string; // text string or image base64/URL
   width: number;
   height: number;
-  color: string; // Background color for text notes
+  color: string; // background color for text notes
 }
 
 interface ViewState {
@@ -27,14 +27,14 @@ interface BoardState {
   snapshots: Record<string, Pin[]>;
   view: ViewState;
   
-  // Actions
+  // actions
   addPin: (type: PinType, content: string, x?: number, y?: number) => void;
   updatePin: (id: string, patches: Partial<Pin>) => void;
   removePin: (id: string) => void;
 
   updateView: (x: number, y: number, scale: number) => void;
   
-  // Snapshot Logic
+  // snapshot Logic
   saveSnapshot: (name: string) => void;
   loadSnapshot: (name: string) => void;
   deleteSnapshot: (name: string) => void;

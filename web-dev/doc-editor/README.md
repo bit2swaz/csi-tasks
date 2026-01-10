@@ -12,12 +12,13 @@ it uses a go backend for high concurrency websocket handling and a nextjs fronte
 
 ## features
 
-- real-time collaboration: multiple users can edit the same document with sub-millisecond sync.
-- presence awareness: users can see who is currently in the session.
-- persistence: document state is maintained in-memory on the server.
-- concurrency control: robust backend design handles simultaneous writes without race conditions.
-- authentication: simple username-based session gating.
-- responsive ui: speaks for itself.
+- **real-time collaboration**: multiple users can edit the same document with sub-millisecond sync.
+- **presence awareness**: users can see who is currently in the session.
+- **full CRUD operations**: create, read, update, and delete documents directly from the UI.
+- **persistence**: document state is maintained in-memory on the server.
+- **concurrency control**: robust backend design handles simultaneous writes without race conditions.
+- **authentication**: simple username-based session gating.
+- **responsive ui**: modern dark-themed interface with smooth animations.
 
 ## architecture
 
@@ -92,8 +93,10 @@ npm test
 ## api reference
 
 ### http endpoints
-- POST /login: accepts a username and returns a session status.
-- GET /documents: returns a list of available document ids.
+- **POST /login**: accepts a username and returns a session status.
+- **GET /documents**: returns a list of all available document ids.
+- **POST /documents**: creates a new document. body: `{"id": "document-name"}`.
+- **DELETE /documents/{id}**: deletes a document by its id.
 
 ### websocket protocol
 endpoint: ws://localhost:8080/ws?docID=[id]

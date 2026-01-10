@@ -11,13 +11,13 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-// 1. Test the "Database" for Race Conditions
-// We simulate 100 goroutines trying to read/write the same doc at once.
+// 1. test the "Database" for race conditions
+// we simulate 100 goroutines trying to read/write the same doc at once.
 func TestDocumentStoreConcurrency(t *testing.T) {
 	s := NewDocumentStore()
 	var wg sync.WaitGroup
 	
-	// 100 Writers
+	// 100 writers
 	for i := 0; i < 100; i++ {
 		wg.Add(1)
 		go func(val int) {
@@ -26,7 +26,7 @@ func TestDocumentStoreConcurrency(t *testing.T) {
 		}(i)
 	}
 
-	// 100 Readers
+	// 100 readers
 	for i := 0; i < 100; i++ {
 		wg.Add(1)
 		go func() {

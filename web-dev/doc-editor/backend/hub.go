@@ -12,13 +12,13 @@ var upgrader = websocket.Upgrader{
 	CheckOrigin: func(r *http.Request) bool { return true },
 }
 
-// Client wraps the connection with a Mutex to ensure thread safety
+// wraps the connection with a mutex to ensure thread safety
 type Client struct {
 	Conn *websocket.Conn
-	Mu   sync.Mutex // Protects WriteJSON
+	Mu   sync.Mutex // protects WriteJSON
 }
 
-// WriteJSON is a thread-safe helper
+// a thread-safe helper
 func (c *Client) WriteJSON(v interface{}) error {
 	c.Mu.Lock()
 	defer c.Mu.Unlock()
@@ -50,17 +50,17 @@ func (h *Hub) HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Create a thread-safe client
+	// create a thread-safe client
 	client := &Client{Conn: conn}
 
-	// 1. Send Init State (Thread-safe now)
+	// 1. send init state (Thread-safe now)
 	currentContent := store.Get(docID)
 	if err := client.WriteJSON(map[string]string{"type": "init", "content": currentContent}); err != nil {
 		conn.Close()
 		return
 	}
 
-	// 2. Register Client
+	// 2. register client
 	h.Lock()
 	if h.rooms[docID] == nil {
 		h.rooms[docID] = make(map[*Client]bool)
@@ -68,7 +68,7 @@ func (h *Hub) HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 	h.rooms[docID][client] = true
 	h.Unlock()
 
-	// Cleanup on exit
+	// cleanup on exit
 	defer func() {
 		h.Lock()
 		if h.rooms[docID] != nil {
@@ -81,7 +81,7 @@ func (h *Hub) HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 		conn.Close()
 	}()
 
-	// 3. Listen Loop
+	// 3. listen loop
 	for {
 		var msg map[string]string
 		// ReadJSON is safe to run concurrently with WriteJSON (one reader, one writer rule)
@@ -102,7 +102,7 @@ func (h *Hub) broadcast(docID string, content string, sender *Client) {
 
 	for client := range h.rooms[docID] {
 		if client != sender {
-			// Now using the thread-safe WriteJSON method
+			// now using the thread-safe WriteJSON method
 			err := client.WriteJSON(map[string]string{
 				"type":    "update",
 				"content": content,

@@ -28,16 +28,39 @@ this architecture avoids global variables and prevents large if/else chains by u
 
 ensure you have go installed on your machine.
 
-### running the code
+### running the application
 
 clone the repository and navigate to the project folder.
 
+#### command-line flags
+
+the application supports the following flags:
+
+```bash
+# show help message
+go run . --help
+# or
+go run . -h
+
+# show version information
+go run . --version
+# or
+go run . -v
+
+# start interactive shell (default behavior)
+go run .
+# or explicitly
+go run . --interactive
+```
+
+#### interactive shell
+
 start the interactive shell:
-```go
+```bash
 go run .
 ```
 
-once the shell starts, you will see a > prompt. you can execute the following commands:
+once the shell starts, you will see a banner and a `>` prompt. you can execute the following commands:
 ```bash
 mkdir <path>
 # create a directory (e.g., mkdir /usr)
@@ -54,8 +77,42 @@ cat <path>
 rm <path>
 # remove a file or directory recursively.
 
+help
+# show available commands and their usage.
+
 exit
 # close the application.
+```
+
+#### example session
+
+```bash
+$ go run .
+
+Welcome!
+Type 'help' for available commands or 'exit' to quit
+
+> mkdir /home/user
+ok
+> touch /home/user/readme.txt Welcome to the file system
+ok
+> ls /home
+user
+> cat /home/user/readme.txt
+Welcome to the file system
+> help
+
+Available Commands:
+  mkdir <path>              Create a new directory
+  touch <path> [content]    Create a file with optional content
+  ls [path]                 List directory contents (default: /)
+  cat <path>                Display file contents
+  rm <path>                 Remove file or directory
+  help                      Show this help
+  exit                      Exit the program
+
+> exit
+shutting down...
 ```
 
 ### testing
